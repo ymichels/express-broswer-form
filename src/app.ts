@@ -1,32 +1,32 @@
 import express from 'express';
-import { generateFormRouter, prepareAppForForms } from './generateExpressForm'
+import exphbs from 'express-handlebars';
+import path from 'path';
+import fs from 'fs';
+import bodyparser from 'body-parser';
+import { formGenerator } from './formGenerator/formGenerator';
+export function prepareAppForForms(app: any) { //TODO add type express
+    app.use(bodyparser.urlencoded({
+        extended: true
+    }));
+    app.use(bodyparser.json());
+    app.set('views', path.join(__dirname, '/views/'));
+    app.engine('hbs', exphbs({ extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts/' }));
+    app.set('view engine', 'hbs');
+    app.use('/', express.static(path.join(__dirname, './views')))
+}
+export function generateFormRouter(fields: Field[], route: string, resultHandler: (body: any) => any) { //TODO change to types
+    const form = formGenerator(fields, route);
+    const formName = route.replace('/', '');
+    fs.writeFile(`${path.join(__dirname, './views')}/${formName}.hbs`, form, () => { console.log('successfuly generated form') });
+    const router = express.Router();
+    router.get('/', (req, res) => {
+        res.render(formName, {
+            viewTitle: formName
+        });
+    });
+    router.post('/', (req, res) => {
+        res.status(200).send(resultHandler(req.body));
+    });
 
-var app = express();
-
-
-prepareAppForForms(app);// adds dependensies to the app
-app.use('/form', generateFormRouter(
-    [
-        {
-            description: "enter the full name",
-            fieldName: "fullName",
-            fieldType: "string",
-            isRequired: true
-        },
-        {
-            description: "enter the dirth date",
-            fieldName: "birthday",
-            fieldType: "date",
-            isRequired: true
-        },
-        {
-            description: "enter the email",
-            fieldName: "email",
-            fieldType: "string",
-            isRequired: false
-        }
-    ], '/form', (body: any) => body));
-
-app.listen(3000, () => {
-    console.log('Express server started at port : 3000');
-});
+    return router;
+}

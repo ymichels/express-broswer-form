@@ -1,12 +1,12 @@
 # Intro
-
+An easy way to create forms in express
 This package is ment to generate and expose a form on express.
 
 ![alt text](https://raw.githubusercontent.com/ymichels/express-broswer-form/master/Sample.PNG)
 
 # Usage
 
-
+    import { generateFormRouter, prepareAppForForms } from 'express-browser-form';
     var app = express();
     prepareAppForForms(app);// adds dependensies to the app
     app.use('/form', generateFormRouter(
