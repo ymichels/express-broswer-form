@@ -36,4 +36,4 @@ This package is ment to generate and expose a form on express.
 
 # Installation
 
-<i>npm install hebrew-english</i><br/>
+<i>npm install express-browser-form</i><br/>
