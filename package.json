@@ -1,8 +1,8 @@
 {
   "name": "express-browser-form",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "An easy way to create forms in express",
-  "main": "app.ts",
+  "main": "index.ts",
   "dependencies": {
     "@types/express": "^4.17.11",
     "copyfiles": "^2.4.1",
