@@ -1,3 +1,4 @@
+import { Field } from './fieldType';
 export const header = (route: string) => `<h3>{{viewTitle}}</h3><form action="${route}" method="POST" autocomplete="off">`;
 
 export const footer = `<div class="form-group">
