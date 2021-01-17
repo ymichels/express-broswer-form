@@ -1,8 +1,8 @@
 {
   "name": "express-browser-form",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "An easy way to create forms in express",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "dependencies": {
     "@types/express": "^4.17.11",
     "copyfiles": "^2.4.1",
@@ -29,5 +29,10 @@
   "bugs": {
     "url": "https://github.com/ymichels/express-broswer-form/issues"
   },
-  "homepage": "https://github.com/ymichels/express-broswer-form#readme"
+  "homepage": "https://github.com/ymichels/express-broswer-form#readme",
+  "scripts": {
+    "build": "npm run clean && tsc && npm run copy-files",
+    "clean": "rm -r dist",
+    "copy-files": "copyfiles -u 1 src/**/*.* dist"
+  }
 }
