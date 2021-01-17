@@ -3,8 +3,9 @@ import exphbs from 'express-handlebars';
 import path from 'path';
 import fs from 'fs';
 import bodyparser from 'body-parser';
+import { Field } from './formGenerator/fieldType';
 import { formGenerator } from './formGenerator/formGenerator';
-export function prepareAppForForms(app: any) { //TODO add type express
+export function prepareAppForForms(app: any) {
     app.use(bodyparser.urlencoded({
         extended: true
     }));
@@ -14,7 +15,7 @@ export function prepareAppForForms(app: any) { //TODO add type express
     app.set('view engine', 'hbs');
     app.use('/', express.static(path.join(__dirname, './views')))
 }
-export function generateFormRouter(fields: Field[], route: string, resultHandler: (body: any) => any) { //TODO change to types
+export function generateFormRouter(fields: Field[], route: string, resultHandler: (body: any) => any) {
     const form = formGenerator(fields, route);
     const formName = route.replace('/', '');
     fs.writeFile(`${path.join(__dirname, './views')}/${formName}.hbs`, form, () => { console.log('successfuly generated form') });

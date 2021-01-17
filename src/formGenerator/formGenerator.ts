@@ -1,8 +1,8 @@
 import { footer, generateField, header } from "./templates";
-
-export function formGenerator(fields:Field[], route:string){//TODO add types
+import { Field } from './fieldType';
+export function formGenerator(fields:Field[], route:string){
     let result = header(route);
-    fields.forEach((field:Field) => {//TODO add types
+    fields.forEach((field:Field) => {
         result += generateField(field);
     });
     return result + footer;

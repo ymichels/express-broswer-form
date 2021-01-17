@@ -1,4 +1,4 @@
-interface Field {
+export interface Field {
     fieldName: string;
     description: string;
     fieldType: string;

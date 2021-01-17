@@ -1,6 +1,6 @@
 {
   "name": "express-browser-form",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An easy way to create forms in express",
   "main": "app.ts",
   "dependencies": {
